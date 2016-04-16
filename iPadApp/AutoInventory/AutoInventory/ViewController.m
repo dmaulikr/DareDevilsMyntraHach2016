@@ -154,7 +154,31 @@
 }
 
 - (IBAction)didTapCameraButton:(id)sender {
-    [self scanForCode];
+    UIImage *image = [self captureWebView:self.webView];
+    
+    ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:image.CGImage];
+    ZXBinaryBitmap *bitmap = [ZXBinaryBitmap binaryBitmapWithBinarizer:[ZXHybridBinarizer binarizerWithSource:source]];
+    
+    NSError *error = nil;
+    
+    // There are a number of hints we can give to the reader, including
+    // possible formats, allowed lengths, and the string encoding.
+    ZXDecodeHints *hints = [ZXDecodeHints hints];
+    
+    ZXMultiFormatReader *reader = [ZXMultiFormatReader reader];
+    ZXResult *result = [reader decode:bitmap
+                                hints:hints
+                                error:&error];
+    NSString *codeText = nil;
+    if (result) {
+        codeText = result.text;
+    }
+    
+    if (codeText) {
+        [self playSoundForSucessfullScan];
+        [self.cardDataSource addObject:codeText];
+        [self.tableView reloadData];
+    }
 }
 
 - (IBAction)didTapAutoScanButton:(id)sender {
