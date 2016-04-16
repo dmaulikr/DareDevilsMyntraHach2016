@@ -1,0 +1,6 @@
+IP: 10.0.12.209
+
+Bonjour Networking:
+sudo apt-get update
+sudo apt-get install libnss-mdns
+https://www.raspberrypi.org/forums/viewtopic.php?f=66&t=18207
