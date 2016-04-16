@@ -9,6 +9,15 @@
 #import "ViewController.h"
 #import "GCDAsyncSocket.h"
 #import <AVFoundation/AVFoundation.h>
+#import <ZXingObjC/ZXDecodeHints.h>
+#import <ZXingObjC/ZXCGImageLuminanceSource.h>
+#import <ZXingObjC/ZXLuminanceSource.h>
+#import <ZXingObjC/ZXHybridBinarizer.h>
+#import <ZXingObjC/ZXBinaryBitmap.h>
+#import <ZXingObjC/ZXMultiFormatReader.h>
+#import <ZXingObjC/ZXGenericMultipleBarcodeReader.h>
+
+
 
 @interface ViewController ()<UITabBarDelegate, UITableViewDataSource, UIWebViewDelegate>
 
@@ -37,7 +46,9 @@
     self.cardDataSource = [NSMutableArray array];
     
     self.webView.delegate = self;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.12.209:8080/stream_simple.html"]]];
+//    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.12.209:8080/stream_simple.html"]]];
+    
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://en.wikipedia.org/wiki/QR_code"]]];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -129,8 +140,31 @@
 }
 
 - (IBAction)didTapCameraButton:(id)sender {
+    NSMutableDictionary *cardInfo = [NSMutableDictionary dictionaryWithCapacity:2];
     UIImage *image = [self captureWebView:self.webView];
-    NSDictionary *cardInfo = @{@"image":image};
+    [cardInfo setObject:image forKey:@"image"];
+    
+    ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:image.CGImage];
+    ZXBinaryBitmap *bitmap = [ZXBinaryBitmap binaryBitmapWithBinarizer:[ZXHybridBinarizer binarizerWithSource:source]];
+    
+    NSError *error = nil;
+    
+    // There are a number of hints we can give to the reader, including
+    // possible formats, allowed lengths, and the string encoding.
+    ZXDecodeHints *hints = [ZXDecodeHints hints];
+    
+    ZXMultiFormatReader *reader = [ZXMultiFormatReader reader];
+    ZXResult *result = [reader decode:bitmap
+                                hints:hints
+                                error:&error];
+    if (result) {
+        NSString *contents = result.text;
+        [cardInfo setObject:contents forKey:@"text"];
+    } else {
+        // Use error to determine why we didn't get a result, such as a barcode
+        // not being found, an invalid checksum, or a format inconsistency.
+    }
+    
     [self.cardDataSource addObject:cardInfo];
     [self.tableView reloadData];
 }
@@ -157,6 +191,10 @@
     NSDictionary *cardInfo = [self.cardDataSource objectAtIndex:indexPath.row];
     UIImageView *capturedImageView = [cell viewWithTag:102];
     capturedImageView.image = cardInfo[@"image"];
+    
+    UILabel *codeLabel = [cell viewWithTag:103];
+    codeLabel.text = cardInfo[@"text"];
+    
     return cell;
 }
 
