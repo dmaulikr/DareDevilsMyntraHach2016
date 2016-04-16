@@ -16,7 +16,7 @@
 #import <ZXingObjC/ZXBinaryBitmap.h>
 #import <ZXingObjC/ZXMultiFormatReader.h>
 #import <ZXingObjC/ZXGenericMultipleBarcodeReader.h>
-
+#import <AudioToolbox/AudioServices.h>
 
 @interface ViewController ()<UITabBarDelegate, UITableViewDataSource, UIWebViewDelegate>
 
@@ -25,7 +25,10 @@
 @property (nonatomic, strong) NSMutableArray *cardDataSource;
 @property (nonatomic, strong) GCDAsyncSocket *socket;
 @property (nonatomic, weak) NSTimer *roboTimer;
+@property (weak, nonatomic) IBOutlet UIView *scanLinerView;
+@property (weak, nonatomic) IBOutlet UIButton *autoButton;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraintScanLiner;
 @end
 
 @implementation ViewController
@@ -47,6 +50,18 @@
     
     self.webView.delegate = self;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.12.209:8080/stream_simple.html"]]];
+    
+//    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
+//    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
+//    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
+//    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
+//    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
+    
+    self.scanLinerView.layer.shadowColor = [UIColor redColor].CGColor;
+    self.scanLinerView.layer.shadowOffset = CGSizeMake(0.5, 0.5);
+    self.scanLinerView.layer.shadowOpacity = 0.6;
+    self.scanLinerView.layer.shadowRadius = 1.5;
+    self.scanLinerView.alpha = 0.0;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -139,23 +154,65 @@
 }
 
 - (IBAction)didTapCameraButton:(id)sender {
-    [self scanForCode];
+    UIImage *image = [self captureWebView:self.webView];
+    
+    ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:image.CGImage];
+    ZXBinaryBitmap *bitmap = [ZXBinaryBitmap binaryBitmapWithBinarizer:[ZXHybridBinarizer binarizerWithSource:source]];
+    
+    NSError *error = nil;
+    
+    // There are a number of hints we can give to the reader, including
+    // possible formats, allowed lengths, and the string encoding.
+    ZXDecodeHints *hints = [ZXDecodeHints hints];
+    
+    ZXMultiFormatReader *reader = [ZXMultiFormatReader reader];
+    ZXResult *result = [reader decode:bitmap
+                                hints:hints
+                                error:&error];
+    NSString *codeText = nil;
+    if (result) {
+        codeText = result.text;
+    }
+    
+    if (codeText) {
+        [self insertCardWithText:codeText];
+    }
 }
 
-- (IBAction)didToggleRobotSwitch:(id)sender {
-    UISwitch *roboSwitch = (UISwitch *)sender;
-    if (roboSwitch.on) {
+- (IBAction)didTapAutoScanButton:(id)sender {
+    self.autoButton.selected = !self.autoButton.selected;
+    if (self.autoButton.selected) {
+        [self animateScanLiner:YES];
         self.roboTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(scanForCode) userInfo:nil repeats:YES];
         [self.roboTimer fire];
     }
     else {
+        [self animateScanLiner:NO];
         [self.roboTimer invalidate];
         self.roboTimer = nil;
     }
 }
 
+- (void)animateScanLiner:(BOOL)animate {
+    if (animate) {
+        self.scanLinerView.hidden = NO;
+        self.bottomConstraintScanLiner.constant = self.view.bounds.size.height;
+
+        [UIView animateWithDuration:0.2 animations:^{
+            self.scanLinerView.alpha = 1.0;
+        }];
+        
+        [UIView animateWithDuration:4.0 delay:0.0 options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat | UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.view layoutIfNeeded];
+        } completion:nil];
+    }
+    else {
+        self.scanLinerView.hidden = YES;
+    }
+}
+
 - (void)scanForCode {
-    NSMutableDictionary *cardInfo = [NSMutableDictionary dictionaryWithCapacity:2];
+    
     UIImage *image = [self captureWebView:self.webView];
     
     ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:image.CGImage];
@@ -177,20 +234,31 @@
     }
     
     if (codeText && ![self isCodeAlreadyExist:codeText]) {
-        [cardInfo setObject:codeText forKey:@"text"];
-        [cardInfo setObject:image forKey:@"image"];
-        [self.cardDataSource addObject:cardInfo];
-        [self.tableView reloadData];
+        [self insertCardWithText:codeText];
     }
 }
 
+- (void)insertCardWithText:(NSString *)text {
+    [self.cardDataSource addObject:text];
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+    [self.tableView endUpdates];
+    [self playSoundForSucessfullScan];
+}
+
 - (BOOL)isCodeAlreadyExist:(NSString *)codeString {
-    for (NSDictionary *dict in self.cardDataSource) {
-        if ([[dict objectForKey:@"text"] isEqualToString:codeString]) {
-            return YES;
-        }
+    if ([self.cardDataSource containsObject:codeString]) {
+        return YES;
     }
     return NO;
+}
+
+
+- (void)playSoundForSucessfullScan {
+    SystemSoundID completeSound;
+    NSURL *audioPath = [[NSBundle mainBundle] URLForResource:@"success" withExtension:@"wav"];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)audioPath, &completeSound);
+    AudioServicesPlaySystemSound (completeSound);
 }
 
 #pragma mark - TableView
@@ -211,12 +279,15 @@
     imageView.layer.borderColor = [UIColor blackColor].CGColor;
     imageView.layer.borderWidth = 1.0f;
     
-    NSDictionary *cardInfo = [self.cardDataSource objectAtIndex:indexPath.row];
     UIImageView *capturedImageView = [cell viewWithTag:102];
-    capturedImageView.image = cardInfo[@"image"];
+    capturedImageView.layer.cornerRadius = 3.0f;
+    capturedImageView.layer.masksToBounds = YES;
+    capturedImageView.layer.borderColor = [UIColor grayColor].CGColor;
+    capturedImageView.layer.borderWidth = 1.0f;
     
+    NSString *codeText = [self.cardDataSource objectAtIndex:indexPath.row];
     UILabel *codeLabel = [cell viewWithTag:103];
-    codeLabel.text = cardInfo[@"text"];
+    codeLabel.text = codeText;
     
     return cell;
 }
