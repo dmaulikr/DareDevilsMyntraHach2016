@@ -28,21 +28,8 @@
                                     <action selector="didTapCameraButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tlE-D1-k5L"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P40-JA-FwO">
-                                <rect key="frame" x="54" y="963" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="2gb-9h-YhM"/>
-                                    <constraint firstAttribute="height" constant="50" id="j8o-7H-fUx"/>
-                                </constraints>
-                                <state key="normal" image="backward"/>
-                                <connections>
-                                    <action selector="bkwd:" destination="dkx-z0-nzr" eventType="touchDown" id="dAU-w9-p4q"/>
-                                    <action selector="bkwdStop:" destination="dkx-z0-nzr" eventType="touchUpInside" id="vG9-zf-Lyl"/>
-                                    <action selector="bkwdStop:" destination="dkx-z0-nzr" eventType="touchUpOutside" id="y4f-kn-VPc"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gg0-DY-zXO">
-                                <rect key="frame" x="88" y="929" width="50" height="50"/>
+                                <rect key="frame" x="108" y="919" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4Ze-fV-dPc"/>
                                     <constraint firstAttribute="width" constant="50" id="kr1-SX-OWm"/>
@@ -57,7 +44,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v88-nB-v2y">
-                                <rect key="frame" x="54" y="895" width="50" height="50"/>
+                                <rect key="frame" x="64" y="875" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="YuC-z6-SO2"/>
                                     <constraint firstAttribute="width" constant="50" id="kp5-wh-QJp"/>
@@ -90,8 +77,21 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="vG6-TN-Mgg"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P40-JA-FwO">
+                                <rect key="frame" x="64" y="963" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="2gb-9h-YhM"/>
+                                    <constraint firstAttribute="height" constant="50" id="j8o-7H-fUx"/>
+                                </constraints>
+                                <state key="normal" image="backward"/>
+                                <connections>
+                                    <action selector="bkwd:" destination="dkx-z0-nzr" eventType="touchDown" id="dAU-w9-p4q"/>
+                                    <action selector="bkwdStop:" destination="dkx-z0-nzr" eventType="touchUpInside" id="vG9-zf-Lyl"/>
+                                    <action selector="bkwdStop:" destination="dkx-z0-nzr" eventType="touchUpOutside" id="y4f-kn-VPc"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rvr-Ir-Nmo">
-                                <rect key="frame" x="20" y="929" width="50" height="50"/>
+                                <rect key="frame" x="20" y="919" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="RDA-S6-O6o"/>
                                     <constraint firstAttribute="height" constant="50" id="tck-Mv-oQn"/>
@@ -106,19 +106,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gg0-DY-zXO" firstAttribute="leading" secondItem="Rvr-Ir-Nmo" secondAttribute="trailing" constant="18" id="C4A-9F-YeL"/>
-                            <constraint firstItem="v88-nB-v2y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="34" id="EDM-hc-NN4"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Rvr-Ir-Nmo" secondAttribute="bottom" constant="45" id="HYd-fT-b3q"/>
-                            <constraint firstItem="P40-JA-FwO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="34" id="MOe-8E-we0"/>
+                            <constraint firstItem="gg0-DY-zXO" firstAttribute="leading" secondItem="Rvr-Ir-Nmo" secondAttribute="trailing" constant="38" id="C4A-9F-YeL"/>
+                            <constraint firstItem="v88-nB-v2y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="44" id="EDM-hc-NN4"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Rvr-Ir-Nmo" secondAttribute="bottom" constant="55" id="HYd-fT-b3q"/>
+                            <constraint firstItem="P40-JA-FwO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="44" id="MOe-8E-we0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ig1-OR-DXn" secondAttribute="trailing" constant="-20" id="Mue-jW-Elp"/>
                             <constraint firstItem="Rvr-Ir-Nmo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NoG-ED-T0V"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ig1-OR-DXn" secondAttribute="bottom" id="YCE-ga-sv8"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eI0-fe-3VO" secondAttribute="bottom" constant="20" id="cCJ-Wd-V3B"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="P40-JA-FwO" secondAttribute="bottom" constant="11" id="dws-OK-KJ0"/>
                             <constraint firstItem="eI0-fe-3VO" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="eSR-Aq-tT3"/>
-                            <constraint firstItem="P40-JA-FwO" firstAttribute="top" secondItem="v88-nB-v2y" secondAttribute="bottom" constant="18" id="fxu-1Q-C8X"/>
+                            <constraint firstItem="P40-JA-FwO" firstAttribute="top" secondItem="v88-nB-v2y" secondAttribute="bottom" constant="38" id="fxu-1Q-C8X"/>
                             <constraint firstItem="ig1-OR-DXn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="g4n-12-m5L"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gg0-DY-zXO" secondAttribute="bottom" constant="45" id="ptN-rW-rhy"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gg0-DY-zXO" secondAttribute="bottom" constant="55" id="ptN-rW-rhy"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
