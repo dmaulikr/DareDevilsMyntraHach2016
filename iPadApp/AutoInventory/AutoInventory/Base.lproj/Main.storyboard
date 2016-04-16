@@ -17,6 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQl-4V-Pkm">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.35865469858156029" colorSpace="calibratedRGB"/>
+                            </webView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="107" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ig1-OR-DXn">
                                 <rect key="frame" x="418" y="0.0" width="350" height="1024"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -122,11 +126,14 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gg0-DY-zXO" firstAttribute="leading" secondItem="Rvr-Ir-Nmo" secondAttribute="trailing" constant="38" id="C4A-9F-YeL"/>
+                            <constraint firstItem="WQl-4V-Pkm" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="DCF-lO-mJY"/>
                             <constraint firstItem="v88-nB-v2y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="44" id="EDM-hc-NN4"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Rvr-Ir-Nmo" secondAttribute="bottom" constant="55" id="HYd-fT-b3q"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="WQl-4V-Pkm" secondAttribute="bottom" id="IlF-cb-94g"/>
                             <constraint firstItem="P40-JA-FwO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="44" id="MOe-8E-we0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ig1-OR-DXn" secondAttribute="trailing" constant="-20" id="Mue-jW-Elp"/>
                             <constraint firstItem="Rvr-Ir-Nmo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NoG-ED-T0V"/>
+                            <constraint firstItem="WQl-4V-Pkm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Op2-Up-RPf"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ig1-OR-DXn" secondAttribute="bottom" id="YCE-ga-sv8"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eI0-fe-3VO" secondAttribute="bottom" constant="20" id="cCJ-Wd-V3B"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="P40-JA-FwO" secondAttribute="bottom" constant="11" id="dws-OK-KJ0"/>
@@ -134,11 +141,13 @@
                             <constraint firstItem="P40-JA-FwO" firstAttribute="top" secondItem="v88-nB-v2y" secondAttribute="bottom" constant="38" id="fxu-1Q-C8X"/>
                             <constraint firstItem="ig1-OR-DXn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="g4n-12-m5L"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gg0-DY-zXO" secondAttribute="bottom" constant="55" id="ptN-rW-rhy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WQl-4V-Pkm" secondAttribute="trailing" constant="-20" id="rw1-E9-fbS"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="tableView" destination="ig1-OR-DXn" id="3Aa-5U-eCt"/>
+                        <outlet property="webView" destination="WQl-4V-Pkm" id="NjY-Mj-wkg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

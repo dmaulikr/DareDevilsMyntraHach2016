@@ -8,9 +8,11 @@
 
 #import "ViewController.h"
 #import "GCDAsyncSocket.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface ViewController ()<UITabBarDelegate, UITableViewDataSource>
+@interface ViewController ()<UITabBarDelegate, UITableViewDataSource, UIWebViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *cardDataSource;
 @property (nonatomic, strong) GCDAsyncSocket *socket;
@@ -33,7 +35,19 @@
     [self.tableView setContentInset:UIEdgeInsetsMake(40, 0, 0, 0)];
     
     self.cardDataSource = [NSMutableArray array];
+    
+    self.webView.delegate = self;
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.12.209:8080/stream_simple.html"]]];
 }
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"Faield to load");
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSLog(@"Loaded");
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -112,6 +126,9 @@
 
 - (IBAction)rightStop:(id)sender {
     [self writeSocketCommand:@"RIGHTSTOP"];
+}
+
+- (IBAction)didTapCameraButton:(id)sender {
 }
 
 
