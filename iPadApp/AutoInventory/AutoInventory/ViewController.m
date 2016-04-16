@@ -129,6 +129,10 @@
 }
 
 - (IBAction)didTapCameraButton:(id)sender {
+    UIImage *image = [self captureWebView:self.webView];
+    NSDictionary *cardInfo = @{@"image":image};
+    [self.cardDataSource addObject:cardInfo];
+    [self.tableView reloadData];
 }
 
 
@@ -149,7 +153,24 @@
     imageView.layer.masksToBounds = YES;
     imageView.layer.borderColor = [UIColor blackColor].CGColor;
     imageView.layer.borderWidth = 1.0f;
+    
+    NSDictionary *cardInfo = [self.cardDataSource objectAtIndex:indexPath.row];
+    UIImageView *capturedImageView = [cell viewWithTag:102];
+    capturedImageView.image = cardInfo[@"image"];
     return cell;
+}
+
+
+- (UIImage*)captureWebView:(UIWebView*)webView {
+    // capture webview
+    UIImage *img = nil;
+    UIGraphicsBeginImageContextWithOptions(webView.bounds.size, webView.scrollView.opaque, 0.0);
+    {
+        [webView.layer renderInContext: UIGraphicsGetCurrentContext()];
+        img = UIGraphicsGetImageFromCurrentImageContext();
+    }
+    UIGraphicsEndImageContext();
+    return img;
 }
 
 @end
