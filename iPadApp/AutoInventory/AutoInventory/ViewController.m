@@ -18,7 +18,6 @@
 #import <ZXingObjC/ZXGenericMultipleBarcodeReader.h>
 
 
-
 @interface ViewController ()<UITabBarDelegate, UITableViewDataSource, UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -46,9 +45,7 @@
     self.cardDataSource = [NSMutableArray array];
     
     self.webView.delegate = self;
-//    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.12.209:8080/stream_simple.html"]]];
-    
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://en.wikipedia.org/wiki/QR_code"]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.12.209:8080/stream_simple.html"]]];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
