@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		323095141CC21BAA00790051 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 323095131CC21BAA00790051 /* GCDAsyncSocket.m */; };
 		FF9B0F6E1CC21886003DA7C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF9B0F6D1CC21886003DA7C6 /* main.m */; };
 		FF9B0F711CC21886003DA7C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF9B0F701CC21886003DA7C6 /* AppDelegate.m */; };
 		FF9B0F741CC21886003DA7C6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF9B0F731CC21886003DA7C6 /* ViewController.m */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		323095121CC21BAA00790051 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		323095131CC21BAA00790051 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		FF9B0F691CC21886003DA7C6 /* AutoInventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoInventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF9B0F6D1CC21886003DA7C6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FF9B0F6F1CC21886003DA7C6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -39,6 +42,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		323095111CC21B9C00790051 /* GCDAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				323095121CC21BAA00790051 /* GCDAsyncSocket.h */,
+				323095131CC21BAA00790051 /* GCDAsyncSocket.m */,
+			);
+			name = GCDAsyncSocket;
+			sourceTree = "<group>";
+		};
 		FF9B0F601CC21886003DA7C6 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +74,7 @@
 				FF9B0F701CC21886003DA7C6 /* AppDelegate.m */,
 				FF9B0F721CC21886003DA7C6 /* ViewController.h */,
 				FF9B0F731CC21886003DA7C6 /* ViewController.m */,
+				323095111CC21B9C00790051 /* GCDAsyncSocket */,
 				FF9B0F751CC21886003DA7C6 /* Main.storyboard */,
 				FF9B0F781CC21886003DA7C6 /* Assets.xcassets */,
 				FF9B0F7A1CC21886003DA7C6 /* LaunchScreen.storyboard */,
@@ -149,6 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				323095141CC21BAA00790051 /* GCDAsyncSocket.m in Sources */,
 				FF9B0F741CC21886003DA7C6 /* ViewController.m in Sources */,
 				FF9B0F711CC21886003DA7C6 /* AppDelegate.m in Sources */,
 				FF9B0F6E1CC21886003DA7C6 /* main.m in Sources */,
@@ -302,6 +316,7 @@
 				FF9B0F821CC21886003DA7C6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
