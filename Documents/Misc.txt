@@ -9,3 +9,9 @@ Raspi Config:
 sudo raspi-config
 
 
+SCP:
+scp himadrijyoti@10.0.12.94:/Users/himadrijyoti/Desktop/DareDevils/Backend/MotorController/motorcontroller_twisted.py .
+
+Run Python Motor Controller Server:
+sudo nice -10 python motorcontroller_twisted.py
+
