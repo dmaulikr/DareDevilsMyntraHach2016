@@ -25,7 +25,10 @@
 @property (nonatomic, strong) NSMutableArray *cardDataSource;
 @property (nonatomic, strong) GCDAsyncSocket *socket;
 @property (nonatomic, weak) NSTimer *roboTimer;
+@property (weak, nonatomic) IBOutlet UIView *scanLinerView;
+@property (weak, nonatomic) IBOutlet UIButton *autoButton;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraintScanLiner;
 @end
 
 @implementation ViewController
@@ -53,6 +56,12 @@
 //    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
 //    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
 //    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
+    
+    self.scanLinerView.layer.shadowColor = [UIColor redColor].CGColor;
+    self.scanLinerView.layer.shadowOffset = CGSizeMake(0.5, 0.5);
+    self.scanLinerView.layer.shadowOpacity = 0.6;
+    self.scanLinerView.layer.shadowRadius = 1.5;
+    self.scanLinerView.alpha = 0.0;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -148,15 +157,35 @@
     [self scanForCode];
 }
 
-- (IBAction)didToggleRobotSwitch:(id)sender {
-    UISwitch *roboSwitch = (UISwitch *)sender;
-    if (roboSwitch.on) {
+- (IBAction)didTapAutoScanButton:(id)sender {
+    self.autoButton.selected = !self.autoButton.selected;
+    if (self.autoButton.selected) {
+        [self animateScanLiner:YES];
         self.roboTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(scanForCode) userInfo:nil repeats:YES];
         [self.roboTimer fire];
     }
     else {
+        [self animateScanLiner:NO];
         [self.roboTimer invalidate];
         self.roboTimer = nil;
+    }
+}
+
+- (void)animateScanLiner:(BOOL)animate {
+    if (animate) {
+        self.scanLinerView.hidden = NO;
+        self.bottomConstraintScanLiner.constant = self.view.bounds.size.height;
+
+        [UIView animateWithDuration:0.2 animations:^{
+            self.scanLinerView.alpha = 1.0;
+        }];
+        
+        [UIView animateWithDuration:4.0 delay:0.0 options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat | UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.view layoutIfNeeded];
+        } completion:nil];
+    }
+    else {
+        self.scanLinerView.hidden = YES;
     }
 }
 
