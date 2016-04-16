@@ -37,6 +37,10 @@ Kill Process:
 killall mjpg_streamer
 killall raspistill
 
+Script SCP:
+scp runmotor.sh  runpic.sh  runstream.sh pi@10.0.12.209:/home/pi/
+
+
 
 
 
