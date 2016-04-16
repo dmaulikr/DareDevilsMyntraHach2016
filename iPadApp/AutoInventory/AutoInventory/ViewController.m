@@ -12,6 +12,7 @@
 @interface ViewController ()<UITabBarDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *cardDataSource;
 @property (nonatomic, strong) GCDAsyncSocket *socket;
 
 @end
@@ -28,6 +29,10 @@
                                              selector: @selector(handleEnteredBackground:)
                                                  name: UIApplicationDidEnterBackgroundNotification
                                                object: nil];
+    
+    [self.tableView setContentInset:UIEdgeInsetsMake(40, 0, 0, 0)];
+    
+    self.cardDataSource = [NSMutableArray array];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -116,7 +121,18 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return self.cardDataSource.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cardCell"];
+    [cell setBackgroundColor:[UIColor clearColor]];
+    UIImageView *imageView = [cell viewWithTag:101];
+    imageView.layer.cornerRadius = 5.0f;
+    imageView.layer.masksToBounds = YES;
+    imageView.layer.borderColor = [UIColor blackColor].CGColor;
+    imageView.layer.borderWidth = 1.0f;
+    return cell;
 }
 
 @end
