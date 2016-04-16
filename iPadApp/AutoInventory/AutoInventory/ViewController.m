@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *cardDataSource;
 @property (nonatomic, strong) GCDAsyncSocket *socket;
+@property (nonatomic, weak) NSTimer *roboTimer;
 
 @end
 
@@ -67,6 +68,7 @@
     
     self.socket.delegate = nil;
     self.socket = nil;
+    self.roboTimer = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -137,9 +139,24 @@
 }
 
 - (IBAction)didTapCameraButton:(id)sender {
+    [self scanForCode];
+}
+
+- (IBAction)didToggleRobotSwitch:(id)sender {
+    UISwitch *roboSwitch = (UISwitch *)sender;
+    if (roboSwitch.on) {
+        self.roboTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(scanForCode) userInfo:nil repeats:YES];
+        [self.roboTimer fire];
+    }
+    else {
+        [self.roboTimer invalidate];
+        self.roboTimer = nil;
+    }
+}
+
+- (void)scanForCode {
     NSMutableDictionary *cardInfo = [NSMutableDictionary dictionaryWithCapacity:2];
     UIImage *image = [self captureWebView:self.webView];
-    [cardInfo setObject:image forKey:@"image"];
     
     ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:image.CGImage];
     ZXBinaryBitmap *bitmap = [ZXBinaryBitmap binaryBitmapWithBinarizer:[ZXHybridBinarizer binarizerWithSource:source]];
@@ -154,18 +171,27 @@
     ZXResult *result = [reader decode:bitmap
                                 hints:hints
                                 error:&error];
+    NSString *codeText = nil;
     if (result) {
-        NSString *contents = result.text;
-        [cardInfo setObject:contents forKey:@"text"];
-    } else {
-        // Use error to determine why we didn't get a result, such as a barcode
-        // not being found, an invalid checksum, or a format inconsistency.
+        codeText = result.text;
     }
     
-    [self.cardDataSource addObject:cardInfo];
-    [self.tableView reloadData];
+    if (codeText && ![self isCodeAlreadyExist:codeText]) {
+        [cardInfo setObject:codeText forKey:@"text"];
+        [cardInfo setObject:image forKey:@"image"];
+        [self.cardDataSource addObject:cardInfo];
+        [self.tableView reloadData];
+    }
 }
 
+- (BOOL)isCodeAlreadyExist:(NSString *)codeString {
+    for (NSDictionary *dict in self.cardDataSource) {
+        if ([[dict objectForKey:@"text"] isEqualToString:codeString]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 
 #pragma mark - TableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
