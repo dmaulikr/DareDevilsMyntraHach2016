@@ -47,6 +47,12 @@
     
     self.webView.delegate = self;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.12.209:8080/stream_simple.html"]]];
+    
+//    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
+//    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
+//    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
+//    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
+//    [self.cardDataSource addObject:@"6531221-3r3334-434324"];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -155,7 +161,6 @@
 }
 
 - (void)scanForCode {
-    NSMutableDictionary *cardInfo = [NSMutableDictionary dictionaryWithCapacity:2];
     UIImage *image = [self captureWebView:self.webView];
     
     ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:image.CGImage];
@@ -177,18 +182,14 @@
     }
     
     if (codeText && ![self isCodeAlreadyExist:codeText]) {
-        [cardInfo setObject:codeText forKey:@"text"];
-        [cardInfo setObject:image forKey:@"image"];
-        [self.cardDataSource addObject:cardInfo];
+        [self.cardDataSource addObject:codeText];
         [self.tableView reloadData];
     }
 }
 
 - (BOOL)isCodeAlreadyExist:(NSString *)codeString {
-    for (NSDictionary *dict in self.cardDataSource) {
-        if ([[dict objectForKey:@"text"] isEqualToString:codeString]) {
-            return YES;
-        }
+    if ([self.cardDataSource containsObject:codeString]) {
+        return YES;
     }
     return NO;
 }
@@ -211,12 +212,15 @@
     imageView.layer.borderColor = [UIColor blackColor].CGColor;
     imageView.layer.borderWidth = 1.0f;
     
-    NSDictionary *cardInfo = [self.cardDataSource objectAtIndex:indexPath.row];
     UIImageView *capturedImageView = [cell viewWithTag:102];
-    capturedImageView.image = cardInfo[@"image"];
+    capturedImageView.layer.cornerRadius = 3.0f;
+    capturedImageView.layer.masksToBounds = YES;
+    capturedImageView.layer.borderColor = [UIColor grayColor].CGColor;
+    capturedImageView.layer.borderWidth = 1.0f;
     
+    NSString *codeText = [self.cardDataSource objectAtIndex:indexPath.row];
     UILabel *codeLabel = [cell viewWithTag:103];
-    codeLabel.text = cardInfo[@"text"];
+    codeLabel.text = codeText;
     
     return cell;
 }
