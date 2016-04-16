@@ -1,3 +1,6 @@
+from twisted.internet.protocol import Protocol, Factory
+from twisted.internet import reactor
+
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 

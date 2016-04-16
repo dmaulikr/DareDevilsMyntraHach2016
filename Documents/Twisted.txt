@@ -8,3 +8,6 @@ https://www.youtube.com/watch?v=GuNwewBU_Hw
 I/O Using Twisted:
 https://blogs.gnome.org/markmc/2013/06/04/async-io-and-python/
 
+Install:
+>sudo apt-get install python-twisted
+
