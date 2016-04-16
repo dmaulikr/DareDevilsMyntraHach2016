@@ -36,7 +36,9 @@
                                 </constraints>
                                 <state key="normal" image="backward"/>
                                 <connections>
-                                    <action selector="didTouchAndHoldBackwardButton:" destination="BYZ-38-t0r" eventType="touchDown" id="rhy-cv-AWI"/>
+                                    <action selector="bkwd:" destination="dkx-z0-nzr" eventType="touchDown" id="dAU-w9-p4q"/>
+                                    <action selector="bkwdStop:" destination="dkx-z0-nzr" eventType="touchUpInside" id="vG9-zf-Lyl"/>
+                                    <action selector="bkwdStop:" destination="dkx-z0-nzr" eventType="touchUpOutside" id="y4f-kn-VPc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gg0-DY-zXO">
@@ -49,18 +51,9 @@
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTouchAndHoldRightButton:" destination="BYZ-38-t0r" eventType="touchDown" id="5WM-91-Zep"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rvr-Ir-Nmo">
-                                <rect key="frame" x="20" y="929" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="RDA-S6-O6o"/>
-                                    <constraint firstAttribute="height" constant="50" id="tck-Mv-oQn"/>
-                                </constraints>
-                                <state key="normal" image="left"/>
-                                <connections>
-                                    <action selector="didTouchAndHoldLeftButton:" destination="BYZ-38-t0r" eventType="touchDown" id="OuT-WY-HK5"/>
+                                    <action selector="right:" destination="dkx-z0-nzr" eventType="touchDown" id="xHz-sT-Xkd"/>
+                                    <action selector="rightStop:" destination="dkx-z0-nzr" eventType="touchUpInside" id="ohf-M1-vNp"/>
+                                    <action selector="rightStop:" destination="dkx-z0-nzr" eventType="touchUpOutside" id="uDB-nR-49p"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v88-nB-v2y">
@@ -71,7 +64,9 @@
                                 </constraints>
                                 <state key="normal" image="forward"/>
                                 <connections>
-                                    <action selector="didToucandHoldForwardButton:" destination="BYZ-38-t0r" eventType="touchDown" id="eIP-hG-xDv"/>
+                                    <action selector="fwd:" destination="dkx-z0-nzr" eventType="touchDown" id="NUJ-jw-O1O"/>
+                                    <action selector="fwdStop:" destination="dkx-z0-nzr" eventType="touchUpInside" id="gba-ja-kH3"/>
+                                    <action selector="fwdStop:" destination="dkx-z0-nzr" eventType="touchUpOutside" id="lBi-E1-rNx"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ig1-OR-DXn">
@@ -95,6 +90,19 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="vG6-TN-Mgg"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rvr-Ir-Nmo">
+                                <rect key="frame" x="20" y="929" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="RDA-S6-O6o"/>
+                                    <constraint firstAttribute="height" constant="50" id="tck-Mv-oQn"/>
+                                </constraints>
+                                <state key="normal" image="left"/>
+                                <connections>
+                                    <action selector="left:" destination="dkx-z0-nzr" eventType="touchDown" id="Wtx-Eq-SDl"/>
+                                    <action selector="leftStop:" destination="dkx-z0-nzr" eventType="touchUpInside" id="ZkK-OY-Fyl"/>
+                                    <action selector="leftStop:" destination="dkx-z0-nzr" eventType="touchUpOutside" id="aCR-qA-jgz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>

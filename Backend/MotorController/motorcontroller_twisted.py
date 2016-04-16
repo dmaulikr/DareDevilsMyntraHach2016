@@ -29,7 +29,7 @@ class MotorController(Protocol):
             GPIO.output(18, True)
             GPIO.output(22, True)
     
-        elif (data == 'FWDSTP'):
+        elif (data == 'FWDSTOP'):
             msg = "Move Forward STOP"
             GPIO.output(18, False)
             GPIO.output(22, False)
@@ -39,7 +39,7 @@ class MotorController(Protocol):
             GPIO.output(17, True)
             GPIO.output(23, True)
 
-        elif (data == 'BKWDSTP'):
+        elif (data == 'BKWDSTOP'):
             msg = "Move Backward STOP"
             GPIO.output(17, False)
             GPIO.output(23, False)
