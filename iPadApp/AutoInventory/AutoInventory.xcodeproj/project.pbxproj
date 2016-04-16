@@ -11,6 +11,7 @@
 		323095191CC2473400790051 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323095181CC2473400790051 /* QuartzCore.framework */; };
 		3230951C1CC2577D00790051 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3230951A1CC2577D00790051 /* AVFoundation.framework */; };
 		3230951D1CC2577D00790051 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3230951B1CC2577D00790051 /* AVKit.framework */; };
+		3230955D1CC2BBC700790051 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3230955C1CC2BBC700790051 /* success.wav */; };
 		CAF2FE01CEBEBF9B91D6746C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F96AE9B64A65C5C54C4A4E2 /* libPods.a */; };
 		FF9B0F6E1CC21886003DA7C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF9B0F6D1CC21886003DA7C6 /* main.m */; };
 		FF9B0F711CC21886003DA7C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF9B0F701CC21886003DA7C6 /* AppDelegate.m */; };
@@ -26,6 +27,7 @@
 		323095181CC2473400790051 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3230951A1CC2577D00790051 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3230951B1CC2577D00790051 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		3230955C1CC2BBC700790051 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
 		44BA92C17B7743AF87145E5C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		60421363EFBB2D51B0B805DB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9F96AE9B64A65C5C54C4A4E2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +112,7 @@
 				FF9B0F701CC21886003DA7C6 /* AppDelegate.m */,
 				FF9B0F721CC21886003DA7C6 /* ViewController.h */,
 				FF9B0F731CC21886003DA7C6 /* ViewController.m */,
+				3230955C1CC2BBC700790051 /* success.wav */,
 				323095111CC21B9C00790051 /* GCDAsyncSocket */,
 				FF9B0F751CC21886003DA7C6 /* Main.storyboard */,
 				FF9B0F781CC21886003DA7C6 /* Assets.xcassets */,
@@ -188,6 +191,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3230955D1CC2BBC700790051 /* success.wav in Resources */,
 				FF9B0F7C1CC21886003DA7C6 /* LaunchScreen.storyboard in Resources */,
 				FF9B0F791CC21886003DA7C6 /* Assets.xcassets in Resources */,
 				FF9B0F771CC21886003DA7C6 /* Main.storyboard in Resources */,

@@ -16,7 +16,7 @@
 #import <ZXingObjC/ZXBinaryBitmap.h>
 #import <ZXingObjC/ZXMultiFormatReader.h>
 #import <ZXingObjC/ZXGenericMultipleBarcodeReader.h>
-
+#import <AudioToolbox/AudioServices.h>
 
 @interface ViewController ()<UITabBarDelegate, UITableViewDataSource, UIWebViewDelegate>
 
@@ -211,6 +211,7 @@
     }
     
     if (codeText && ![self isCodeAlreadyExist:codeText]) {
+        [self playSoundForSucessfullScan];
         [self.cardDataSource addObject:codeText];
         [self.tableView reloadData];
     }
@@ -221,6 +222,14 @@
         return YES;
     }
     return NO;
+}
+
+
+- (void)playSoundForSucessfullScan {
+    SystemSoundID completeSound;
+    NSURL *audioPath = [[NSBundle mainBundle] URLForResource:@"success" withExtension:@"wav"];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)audioPath, &completeSound);
+    AudioServicesPlaySystemSound (completeSound);
 }
 
 #pragma mark - TableView
