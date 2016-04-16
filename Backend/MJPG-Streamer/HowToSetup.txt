@@ -1,0 +1,39 @@
+1.Install build dependencies
+sudo apt-get install libjpeg8-dev imagemagick libv4l-dev
+
+2.Add missing videodev.h
+sudo ln -s /usr/include/linux/videodev2.h /usr/include/linux/videodev.h
+
+3.Download MJPG-Streamer
+wget http://sourceforge.net/code-snapshots/svn/m/mj/mjpg-streamer/code/mjpg-streamer-code-182.zip
+
+4.Unzip
+unzip mjpg-streamer-code-182.zip
+
+5.Build MJPG-Streamer
+cd mjpg-streamer-code-182/mjpg-streamer
+make mjpg_streamer input_file.so output_http.so
+
+6.Install MJPG-Streamer
+sudo cp mjpg_streamer /usr/local/bin
+sudo cp output_http.so input_file.so /usr/local/lib/
+sudo cp -R www /usr/local/www
+
+7. Start the camera
+mkdir /tmp/stream
+raspistill --nopreview -w 1024 -h 768 -q 15 -o /tmp/stream/pic.jpg -tl 50 -t 9999999 -th 0:0:0
+
+-w sets the image width. For an HD stream use 1024 here.
+-h sets the image height. For an HD stream use 768 here.
+-q sets the JPEG quality level, from 0 to 100. I use a pretty low quality, better quality generates bigger pictures, which reduces the frame rate.
+-o sets the output filename for the JPEG pictures. I'm sending them to a temp directory. The same file will be rewritten with updated pictures.
+-tl sets the timelapse interval, in milliseconds. With a value of 100 you get 10 frames per second.
+-t sets the time the program will run. I put a large number here, that amounts to about two hours of run time.
+-th sets the thumbnail picture options. Since I want the pictures to be as small as possible I disabled the thumbnails by setting everything to zero.
+& puts the application to run in the background.
+
+
+8. Starting the streaming server
+LD_LIBRARY_PATH=./ ./mjpg_streamer -i "input_file.so -f /tmp/stream -n pic.jpg" -o "output_http.so -w ./www"
+
+

@@ -15,3 +15,30 @@ scp himadrijyoti@10.0.12.94:/Users/himadrijyoti/Desktop/DareDevils/Backend/Motor
 Run Python Motor Controller Server:
 sudo nice -10 python motorcontroller_twisted.py
 
+
+
+PI Upgrade:
+sudo apt-get update
+sudo apt-get upgrade
+
+MJPG Streamer:
+http://blog.miguelgrinberg.com/post/stream-video-from-the-raspberry-pi-camera-to-web-browsers-even-on-ios-and-android
+http://blog.miguelgrinberg.com/post/how-to-build-and-run-mjpg-streamer-on-the-raspberry-pi
+
+$raspistill --nopreview -w 1024 -h 768 -q 15 -o /tmp/stream/pic.jpg -tl 100 -t 9999999 -th 0:0:0
+ 
+
+LD_LIBRARY_PATH=/usr/local/lib mjpg_streamer -i "input_file.so -f /tmp/stream -n pic.jpg" -o "output_http.so -w /usr/local/www"
+
+Remove Package:
+sudo apt-get --purge remove gimp
+
+Kill Process:
+killall mjpg_streamer
+killall raspistill
+
+
+
+
+
+
