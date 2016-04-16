@@ -175,9 +175,7 @@
     }
     
     if (codeText) {
-        [self playSoundForSucessfullScan];
-        [self.cardDataSource addObject:codeText];
-        [self.tableView reloadData];
+        [self insertCardWithText:codeText];
     }
 }
 
@@ -214,6 +212,7 @@
 }
 
 - (void)scanForCode {
+    
     UIImage *image = [self captureWebView:self.webView];
     
     ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:image.CGImage];
@@ -235,10 +234,16 @@
     }
     
     if (codeText && ![self isCodeAlreadyExist:codeText]) {
-        [self playSoundForSucessfullScan];
-        [self.cardDataSource addObject:codeText];
-        [self.tableView reloadData];
+        [self insertCardWithText:codeText];
     }
+}
+
+- (void)insertCardWithText:(NSString *)text {
+    [self.cardDataSource addObject:text];
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+    [self.tableView endUpdates];
+    [self playSoundForSucessfullScan];
 }
 
 - (BOOL)isCodeAlreadyExist:(NSString *)codeString {
