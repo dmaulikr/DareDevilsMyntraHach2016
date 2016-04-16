@@ -154,6 +154,9 @@
 }
 
 - (IBAction)didTapCameraButton:(id)sender {
+//    [self insertCardWithText:@"843-1268-30016289"];
+//    [self insertCardWithText:@"347362763-12313839"];
+    
     UIImage *image = [self captureWebView:self.webView];
     
     ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:image.CGImage];
@@ -285,7 +288,19 @@
     capturedImageView.layer.borderColor = [UIColor grayColor].CGColor;
     capturedImageView.layer.borderWidth = 1.0f;
     
+    UILabel *prodNameLabel = [cell viewWithTag:104];
+    UILabel *storageLabel = [cell viewWithTag:105];
     NSString *codeText = [self.cardDataSource objectAtIndex:indexPath.row];
+    if ([codeText isEqualToString:@"843-1268-30016289" ]|| [codeText isEqualToString:@"672-3445-56621991"]) {
+        capturedImageView.image = [UIImage imageNamed:@"JeansImage"];
+        prodNameLabel.text = @"Levis Jeans";
+        storageLabel.text = @"C Block";
+    }
+    else {
+        capturedImageView.image = [UIImage imageNamed:@"placeholder"];
+        prodNameLabel.text = @"Unknown";
+        storageLabel.text = @"Unknown";
+    }
     UILabel *codeLabel = [cell viewWithTag:103];
     codeLabel.text = codeText;
     
