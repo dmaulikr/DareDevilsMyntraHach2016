@@ -1,0 +1,11 @@
+sudo apt-get install tightvncserver
+
+tightvncserver
+
+
+VNC Viewer
+10.0.12.209:1
+
+Password: abcd4321
+
+Run “tightvncserver” on every launch.
