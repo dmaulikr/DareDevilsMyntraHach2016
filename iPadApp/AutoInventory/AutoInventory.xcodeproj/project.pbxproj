@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		323095141CC21BAA00790051 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 323095131CC21BAA00790051 /* GCDAsyncSocket.m */; };
+		323095191CC2473400790051 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 323095181CC2473400790051 /* QuartzCore.framework */; };
 		FF9B0F6E1CC21886003DA7C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF9B0F6D1CC21886003DA7C6 /* main.m */; };
 		FF9B0F711CC21886003DA7C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF9B0F701CC21886003DA7C6 /* AppDelegate.m */; };
 		FF9B0F741CC21886003DA7C6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF9B0F731CC21886003DA7C6 /* ViewController.m */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		323095121CC21BAA00790051 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		323095131CC21BAA00790051 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		323095181CC2473400790051 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FF9B0F691CC21886003DA7C6 /* AutoInventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoInventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF9B0F6D1CC21886003DA7C6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FF9B0F6F1CC21886003DA7C6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -36,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				323095191CC2473400790051 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +57,7 @@
 		FF9B0F601CC21886003DA7C6 = {
 			isa = PBXGroup;
 			children = (
+				323095181CC2473400790051 /* QuartzCore.framework */,
 				FF9B0F6B1CC21886003DA7C6 /* AutoInventory */,
 				FF9B0F6A1CC21886003DA7C6 /* Products */,
 			);
