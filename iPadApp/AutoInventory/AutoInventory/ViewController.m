@@ -154,8 +154,6 @@
 }
 
 - (IBAction)didTapCameraButton:(id)sender {
-//    [self insertCardWithText:@"843-1268-30016289"];
-//    [self insertCardWithText:@"347362763-12313839"];
     
     UIImage *image = [self captureWebView:self.webView];
     
@@ -187,7 +185,6 @@
     if (self.autoButton.selected) {
         [self animateScanLiner:YES];
         self.roboTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(scanForCode) userInfo:nil repeats:YES];
-        [self.roboTimer fire];
     }
     else {
         [self animateScanLiner:NO];
@@ -242,7 +239,8 @@
 }
 
 - (void)insertCardWithText:(NSString *)text {
-    [self.cardDataSource addObject:text];
+    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    [self.cardDataSource insertObject:text atIndex:0];
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
     [self.tableView endUpdates];
@@ -288,9 +286,12 @@
     capturedImageView.layer.borderColor = [UIColor grayColor].CGColor;
     capturedImageView.layer.borderWidth = 1.0f;
     
+    NSString *codeText = [self.cardDataSource objectAtIndex:indexPath.row];
+    UILabel *codeLabel = [cell viewWithTag:103];
+    codeLabel.text = codeText;
+    
     UILabel *prodNameLabel = [cell viewWithTag:104];
     UILabel *storageLabel = [cell viewWithTag:105];
-    NSString *codeText = [self.cardDataSource objectAtIndex:indexPath.row];
     if ([codeText isEqualToString:@"843-1268-30016289" ]|| [codeText isEqualToString:@"672-3445-56621991"]) {
         capturedImageView.image = [UIImage imageNamed:@"JeansImage"];
         prodNameLabel.text = @"Levis Jeans";
@@ -301,8 +302,6 @@
         prodNameLabel.text = @"Unknown";
         storageLabel.text = @"Unknown";
     }
-    UILabel *codeLabel = [cell viewWithTag:103];
-    codeLabel.text = codeText;
     
     return cell;
 }
