@@ -184,7 +184,6 @@
                                 <state key="selected" image="auto_selected"/>
                                 <connections>
                                     <action selector="didTapAutoScanButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gsH-CH-IQW"/>
-                                    <action selector="didTapCameraButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0q3-Dy-nyX"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3e-l8-Qez">
